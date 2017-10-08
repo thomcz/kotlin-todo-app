@@ -8,9 +8,10 @@ import android.arch.persistence.room.PrimaryKey
  * Created by Thomas Czogalik on 28.09.2017
  */
 @Entity
-class Item constructor(var title : String, var description : String) {
+class Item constructor(var title: String, var description: String, var checked: Boolean = false) {
 
     constructor() : this("", "")
+
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0
+    var id: Int = 0
 }

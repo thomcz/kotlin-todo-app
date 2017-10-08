@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "thomcz.kotlintodo"
         minSdkVersion 19
@@ -65,4 +67,3 @@ repositories {
 dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0-beta2'
 }
-apply plugin: 'kotlin-android-extensions'

@@ -3,7 +3,6 @@ package thomcz.kotlintodo.activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.graphics.Paint
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +12,6 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CheckBox
 import android.widget.TextView
 import thomcz.kotlintodo.data.Item
 import thomcz.kotlintodo.R
@@ -69,18 +67,11 @@ class MainActivity : AppCompatActivity() {
         val view = it.parent as View
         val title = view.findViewById<TextView>(R.id.todo_item_title)
         val desc = view.findViewById<TextView>(R.id.todo_item_desc)
-        if ((it as CheckBox).isChecked) {
-            setStrikeThroughFlag(title, title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
-            setStrikeThroughFlag(desc, desc.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
-        } else {
-            setStrikeThroughFlag(title, 0)
-            setStrikeThroughFlag(desc, 0)
-        }
+        val item = view.tag as Item
+        RecyclerViewAdapter.Companion.setStrikeThrough(item.checked, title, desc)
     }
 
-    private fun setStrikeThroughFlag(textView: TextView, flag: Int) {
-        textView.paintFlags = flag
-    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -100,4 +91,6 @@ class MainActivity : AppCompatActivity() {
         } else super.onOptionsItemSelected(item)
 
     }
+
+
 }

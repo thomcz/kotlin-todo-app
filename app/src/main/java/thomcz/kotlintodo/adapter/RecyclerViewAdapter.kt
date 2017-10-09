@@ -22,14 +22,10 @@ class RecyclerViewAdapter(private var items: List<Item>, private var changedList
         holder.itemTitleView.text = item.title
         holder.itemDescView.text = item.description
         holder.itemCheckButton.isChecked = item.checked
-        if (item.checked) {
-            holder.itemTitleView.paintFlags = holder.itemTitleView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-            holder.itemDescView.paintFlags = holder.itemDescView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        }
+        setStrikeThrough(holder.itemCheckButton.isChecked, holder.itemTitleView, holder.itemDescView)
         holder.itemCheckButton.setOnClickListener(changedListener)
         holder.itemView.tag = item
     }
-
 
     override fun getItemCount(): Int = items.size
 
@@ -47,6 +43,22 @@ class RecyclerViewAdapter(private var items: List<Item>, private var changedList
         val itemTitleView: TextView = view.findViewById(R.id.todo_item_title)
         val itemDescView: TextView = view.findViewById(R.id.todo_item_desc)
         val itemCheckButton: CheckBox = view.findViewById(R.id.todo_check)
+    }
+
+    companion object {
+        fun setStrikeThrough(isChecked: Boolean, title: TextView, desc: TextView) {
+            if (isChecked) {
+                setStrikeThroughFlag(title, title.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
+                setStrikeThroughFlag(desc, desc.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
+            } else {
+                setStrikeThroughFlag(title, 0)
+                setStrikeThroughFlag(desc, 0)
+            }
+        }
+
+        private fun setStrikeThroughFlag(textView: TextView, flag: Int) {
+            textView.paintFlags = flag
+        }
     }
 
 }

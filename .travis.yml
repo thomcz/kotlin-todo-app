@@ -46,11 +46,11 @@ cache:
 
 script:
   # runs all junit tests and creates a coverage report
-  - ./gradlew clean jacocoTestReport --stacktrace
+  - ./gradlew clean #jacocoTestReport --stacktrace
 
-after_success:
+#after_success:
   # upload project with coverage report to sonarqube
-  - ./gradlew sonarqube --stacktrace
+ # - ./gradlew sonarqube --stacktrace
 
 branches:
   only:
